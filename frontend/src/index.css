@@ -1,0 +1,200 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #1e1b4b 0%, #1a1a2e 50%, #16213e 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #60a5fa, #a78bfa);
+}
+
+/* Grid pattern background */
+.bg-grid-pattern {
+  background-image:
+    linear-gradient(rgba(99, 102, 241, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 102, 241, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Gradient text */
+.gradient-text {
+  @apply bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent;
+}
+
+/* Glow effects */
+.glow-blue {
+  @apply shadow-lg shadow-blue-500/50;
+}
+
+.glow-purple {
+  @apply shadow-lg shadow-purple-500/50;
+}
+
+.glow-pink {
+  @apply shadow-lg shadow-pink-500/50;
+}
+
+/* Backdrop blur */
+.glass {
+  @apply bg-white/10 backdrop-blur-md border border-white/20 rounded-xl;
+}
+
+.glass-dark {
+  @apply bg-slate-900/50 backdrop-blur-xl border border-slate-700 rounded-xl;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(99, 102, 241, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.8);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes blob {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 3s infinite;
+  background-size: 1000px 100%;
+}
+
+.animate-gradient {
+  animation: gradient-shift 8s ease infinite;
+  background-size: 200% 200%;
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+/* Utility classes */
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.backdrop-blur-xl {
+  backdrop-filter: blur(14px);
+}
+
+/* Selection styling */
+::selection {
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  color: white;
+}
+
+/* Focus ring styling */
+input:focus,
+button:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+}
+
+/* Placeholder styling */
+::placeholder {
+  color: rgba(148, 163, 184, 0.7);
+}
+
+/* Link styling */
+a {
+  transition: all 0.3s ease;
+}
+
+/* Form inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select,
+textarea {
+  transition: all 0.3s ease;
+}
+
+/* Page transition */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}

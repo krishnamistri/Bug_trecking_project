@@ -53,6 +53,7 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/bugs/:bugId/comments', require('./routes/comments'));
 app.use('/api/bugs', require('./routes/bugs'));
 app.use('/api/users', require('./routes/users'));
+app.use('/api/notifications', require('./routes/notifications'));
 
 // Create uploads directory if not exists
 const fs = require('fs');

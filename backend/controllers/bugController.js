@@ -1,5 +1,6 @@
 const Bug = require('../models/Bug');
 const Comment = require('../models/Comment');
+const { createNotification } = require('./notificationController');
 
 // @desc    Get all bugs
 // @route   GET /api/bugs
@@ -86,6 +87,9 @@ const createBug = async (req, res) => {
     
     const bug = await Bug.create(req.body);
 
+    // Create notification for admin
+    await createNotification('bug_created', bug, req.user.id);
+
     res.status(201).json({
       success: true,
       data: bug
@@ -117,13 +121,23 @@ const updateBug = async (req, res) => {
     const isAdmin = req.user.role === 'admin';
     const isTesterOwner = req.user.role === 'tester' && bug.createdBy._id.toString() === req.user.id;
     const isDeveloperAssigned = req.user.role === 'developer' && bug.assignedTo && bug.assignedTo._id.toString() === req.user.id;
-    const isTesterClose = req.user.role === 'tester' && bug.status === 'fixed' && bug.createdBy._id.toString() === req.user.id;
 
-    if (!isAdmin && !isTesterOwner && !isDeveloperAssigned && !isTesterClose) {
-      return res.status(403).json({
-        success: false,
-        message: 'Not authorized to update this bug'
-      });
+    // Check if trying to close/verify bug - only tester (owner) can do this
+    if (req.body.status === 'verified') {
+      if (!isAdmin && !isTesterOwner) {
+        return res.status(403).json({
+          success: false,
+          message: 'Only testers can close/verify bugs'
+        });
+      }
+    } else {
+      // For other status updates
+      if (!isAdmin && !isTesterOwner && !isDeveloperAssigned) {
+        return res.status(403).json({
+          success: false,
+          message: 'Not authorized to update this bug'
+        });
+      }
     }
 
     const updatedBug = await Bug.findByIdAndUpdate(req.params.id, req.body, {
