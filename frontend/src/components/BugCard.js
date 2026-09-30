@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { AlertCircle, CheckCircle, Clock, Zap } from 'lucide-react';
+import { getImageUrl } from '../services/api';
 
 const BugCard = ({ bug, onClick, developers = [], onRefresh, user }) => {
   const [selectedDev, setSelectedDev] = useState('');
@@ -196,7 +197,7 @@ const BugCard = ({ bug, onClick, developers = [], onRefresh, user }) => {
           >
             <div className="relative w-full h-40 bg-gray-100 flex items-center justify-center overflow-hidden">
               <img 
-                src={bug.screenshot.startsWith('/') ? bug.screenshot : `/uploads/${bug.screenshot}`}
+                src={getImageUrl(bug.screenshot)}
                 alt="Bug screenshot"
                 className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-300"
                 onError={(e) => e.target.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgZmlsbD0iI2UwZTBlMCIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjIwMCIgeT0iMTUwIiBzdHlsZT0iZm9udC1zaXplOjUwcHg7IGZpbGw6ICM5Y2ExMDY7IGZvbnQtZmFtaWx5OiBBcmlhbDsgIiBmb250LXdlaWdodD0iYm9sZCI+SW1hZ2UgTm90IEZvdW5kPC90ZXh0Pjwvc3ZnPg=='}

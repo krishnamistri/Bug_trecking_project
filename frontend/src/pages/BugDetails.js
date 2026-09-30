@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import BugCard from '../components/BugCard';
 import { useAuth } from '../context/AuthContext';
+import { getImageUrl } from '../services/api';
 
 const BugDetails = () => {
   const { id } = useParams();
@@ -171,7 +172,7 @@ const BugDetails = () => {
           <div className="p-6">
             <div className="w-full bg-gray-100 rounded-lg overflow-hidden border border-gray-200">
               <img 
-                src={bug.screenshot.startsWith('/') ? bug.screenshot : `/uploads/${bug.screenshot}`}
+                src={getImageUrl(bug.screenshot)}
                 alt="Bug screenshot" 
                 className="w-full h-auto"
                 onError={(e) => e.target.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iI2UwZTBlMCIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjQwMCIgeT0iMzAwIiBzdHlsZT0iZm9udC1zaXplOjQ4cHg7IGZpbGw6Izk5OTsgZm9udC1mYW1pbHk6IEFyaWFsOyIgZm9udC13ZWlnaHQ6ImJvbGQiPlNjcmVlbnNob3QgTm90IEZvdW5kPC90ZXh0Pjwvc3ZnPg=='}
